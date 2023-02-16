@@ -14,13 +14,14 @@ class Event extends Component {
     render() {
         const { event } = this.props
         const { isCollapsed } = this.state
-
+        const dateStart = new Date(event.start.dateTime).toGMTString();
+        const dateEnd = new Date(event.end.dateTime).toGMTString();
 
         return (
             <div className='Event'>
                 <h4 className='name' style={{ fontWeight: "bold" }}>{event.summary}</h4>
-                <p className='start'>{event.start}</p>
-                <p className='end'>{event.end}</p>
+                <p className='start'>{dateStart}</p>
+                <p className='end'>{dateEnd}</p>
                 <p className='location'>{event.location}</p>
 
                 <button className="details" onClick={this.handleClick}>{this.state.isCollapsed ? '+' : '-'}

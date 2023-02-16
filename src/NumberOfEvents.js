@@ -5,15 +5,13 @@ class NumberOfEvents extends Component {
         NOE: 32
     }
 
-    componentDidMount() {
-        this.setState({
-            NOE: this.props.NOE || 32
-        });
-    }
+
 
     changeNOE(value) {
-        this.setState({ NOE: value })
+        this.setState({ NOE: value });
     }
+
+
 
     render() {
         const { NOE } = this.state
@@ -24,7 +22,8 @@ class NumberOfEvents extends Component {
                     className='inputNOE'
                     type="number"
                     value={NOE}
-                    onChange={(e) => this.changeNOE(e.target.value)} />
+                    onChange={(e) => this.changeNOE(e.target.value)}
+                />
             </div>
         )
     }

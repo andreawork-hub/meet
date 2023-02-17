@@ -5,6 +5,7 @@ import { extractLocations, getEvents } from '../Api';
 import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
+import NumberOfEvents from '../NumberOfEvents';
 //import NumberOfEvents from '../NumberOfEvents'
 
 describe('<App/> component', () => {
@@ -20,6 +21,10 @@ describe('<App/> component', () => {
     test('render CitySearch', () => {
         expect(AppWrapper.find(CitySearch)).toHaveLength(1);
     });
+
+    test("<NumberOfEvents> component", () => {
+        expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
+    })
 
 });
 
@@ -65,6 +70,37 @@ describe('<App /> integration', () => {
         expect(AppWrapper.state('events')).toEqual(allEvents);
         AppWrapper.unmount();
     });
+    /*
+        test('app changes NOE to new state when user changes input NOE', async () => {
+            const AppWrapper = mount(<App />);
+            const NOEWrapper = AppWrapper.find(NumberOfEvents);
+            const EventListWrapper = AppWrapper.find(EventList);
+            await NOEWrapper.instance().handleInputChange({ target: { value: 16 } });
+            expect(AppWrapper.state('NOE')).toEqual(16);
+            expect(AppWrapper.state('events')).toHaveLenght(16);
+            AppWrapper.unmount();
+        });
+    
+        test("when user updates city search, last state of NOE will be rendered", async () => {
+            const AppWrapper = mount(<App />);
+            const CitySearchWrapper = AppWrapper.find(CitySearch);
+            const NOEWrapper = AppWrapper.find(NumberOfEvents);
+            // simulation 
+            const eventObject = { target: { value: 10 } }
+            await NOEWrapper.instance().handleInputChange(eventObject);
+            const locations = extractLocations(mockData);
+            CitySearchWrapper.setState({ suggestions: locations });
+            const suggestions = CitySearchWrapper.state('suggestions');
+            const selectedIndex = Math.floor(Math.random() * suggestions.length);
+            const selectedCity = suggestions[selectedIndex];
+            await CitySearchWrapper.instance().handleItemClicked(selectedCity);
+            //expect that selectedCity gets stored in App state variable 'selectedLocation'
+            expect(AppWrapper.state("selectedLocation")).toEqual(selectedCity);
+            //NOE rendered doesnt change
+            expect(AppWrapper.state('events')).toHaveLength(eventObject.target.value);
+            AppWrapper.unmount();
+        })
+    */
 
 });
 

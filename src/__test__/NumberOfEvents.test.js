@@ -6,7 +6,7 @@ describe('<NumberOfEvents/> component', () => {
     let NOEWrapper
     beforeAll(() => {
         NOEWrapper = shallow(
-            <NumberOfEvents changeNOE={() => { }} />
+            <NumberOfEvents updateEvents={() => { }} />
         )
     })
 

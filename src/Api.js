@@ -5,10 +5,9 @@
  * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
  * The Set will remove all duplicates from the array.
  */
-
-import axios from 'axios';
 import { mockData } from './mock-data';
 import NProgress from 'nprogress';
+import axios from 'axios';
 
 export const getAccessToken = async () => {
     const accessToken = localStorage.getItem('access_token');

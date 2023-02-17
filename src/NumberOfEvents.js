@@ -2,27 +2,23 @@ import React, { Component } from 'react';
 
 class NumberOfEvents extends Component {
     state = {
-        NOE: 32
+        NOE: this.props.NOE || 32
     }
 
-
-
-    changeNOE(value) {
-        this.setState({ NOE: value });
-    }
-
-
+    changeNOE = (e) => {
+        const inputValue = e.target.value;
+        this.setState({ NOE: inputValue });
+        this.props.updateEvents(undefined, inputValue)
+    };
 
     render() {
-        const { NOE } = this.state
-
         return (
             <div className='NOE'>
                 <input
-                    className='inputNOE'
+                    className='number'
                     type="number"
-                    value={NOE}
-                    onChange={(e) => this.changeNOE(e.target.value)}
+                    value={this.state.NOE}
+                    onChange={this.changeNOE}
                 />
             </div>
         )

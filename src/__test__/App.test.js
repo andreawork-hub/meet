@@ -5,6 +5,7 @@ import { extractLocations, getEvents } from '../Api';
 import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
+import NumberOfEvents from '../NumberOfEvents';
 //import NumberOfEvents from '../NumberOfEvents'
 
 describe('<App/> component', () => {
@@ -19,6 +20,10 @@ describe('<App/> component', () => {
 
     test('render CitySearch', () => {
         expect(AppWrapper.find(CitySearch)).toHaveLength(1);
+    });
+
+    test('render NOE', () => {
+        expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
     });
 
 });
@@ -65,6 +70,26 @@ describe('<App /> integration', () => {
         expect(AppWrapper.state('events')).toEqual(allEvents);
         AppWrapper.unmount();
     });
+
+    test('App passes "NOE" state as a prop to NumberOfEvents', () => {
+        const AppWrapper = mount(<App />);
+        const AppNOEState = AppWrapper.state('NOE');
+        expect(AppNOEState).not.toEqual(undefined);
+        expect(AppWrapper.find(NumberOfEvents).state('NOE')).toBe(AppNOEState);
+        AppWrapper.unmount();
+    });
+
+    test('when the user changes NOE input, app changes NOE', async () => {
+        const AppWrapper = mount(<App />);
+        const eventObject = { target: { value: 20 } };
+        const NOEWrapper = AppWrapper.find(NumberOfEvents);
+        NOEWrapper.find('input.number').simulate('change', eventObject);
+        await getEvents();
+        expect(AppWrapper.state('NOE')).toBe(20);
+        expect(NOEWrapper.state('NOE')).toBe(20);
+        AppWrapper.unmount();
+    });
+
 
 });
 

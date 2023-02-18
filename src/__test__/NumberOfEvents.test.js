@@ -2,11 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import NumberOfEvents from '../NumberOfEvents';
 
+
 describe('<NumberOfEvents/> component', () => {
     let NOEWrapper
     beforeAll(() => {
         NOEWrapper = shallow(
-            <NumberOfEvents changeNOE={() => { }} />
+            <NumberOfEvents />
         )
     })
 
@@ -15,11 +16,13 @@ describe('<NumberOfEvents/> component', () => {
     })
 
     test('user can change NOE', () => {
-        const inputNOE = NOEWrapper.find('input.inputNOE');
-        expect(NOEWrapper.state('NOE')).toBe(32);
-        inputNOE.simulate('change', { target: { value: 16 } });
+        const input = NOEWrapper.find('input.number');
+        const inputValue = { target: { value: 20 } };
+        input.simulate('change', inputValue);
         expect(NOEWrapper.state('NOE')).toBe(16);
     })
 
-}
-)
+    test('render text input', () => {
+        expect(NOEWrapper.find('input.number')).toHaveLength(1);
+    })
+})

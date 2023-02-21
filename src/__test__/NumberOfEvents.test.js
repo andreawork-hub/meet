@@ -7,7 +7,7 @@ describe('<NumberOfEvents/> component', () => {
     let NOEWrapper
     beforeAll(() => {
         NOEWrapper = shallow(
-            <NumberOfEvents />
+            <NumberOfEvents updateEvents={() => { }} />
         )
     })
 
@@ -17,7 +17,7 @@ describe('<NumberOfEvents/> component', () => {
 
     test('user can change NOE', () => {
         const input = NOEWrapper.find('input.number');
-        const inputValue = { target: { value: 20 } };
+        const inputValue = { target: { value: 16 } };
         input.simulate('change', inputValue);
         expect(NOEWrapper.state('NOE')).toBe(16);
     })

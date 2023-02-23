@@ -45,8 +45,6 @@ describe('<App /> integration', () => {
         AppWrapper.unmount();
     });
 
-
-
     test('get list of events matching the city selected by the user', async () => {
         const AppWrapper = mount(<App />);
         const CitySearchWrapper = AppWrapper.find(CitySearch);
@@ -64,10 +62,10 @@ describe('<App /> integration', () => {
 
     test('get list of all events when user selects "See all cities"', async () => {
         const AppWrapper = mount(<App />);
-        const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions li');
-        await suggestionItems.at(suggestionItems.length - 1).simulate('click');
+        const suggestionItems = AppWrapper.find(CitySearch).find(".suggestions li");
+        suggestionItems.at(suggestionItems.length - 1).simulate("click");
         const allEvents = await getEvents();
-        expect(AppWrapper.state('events')).toEqual(allEvents);
+        expect(AppWrapper.state("events")).toEqual(allEvents);
         AppWrapper.unmount();
     });
 
@@ -87,6 +85,25 @@ describe('<App /> integration', () => {
         await getEvents();
         expect(AppWrapper.state('NOE')).toBe(20);
         expect(NOEWrapper.state('NOE')).toBe(20);
+        AppWrapper.unmount();
+    });
+
+    test("updating city search will render a new city but preserver the selected numberOfEvents", async () => {
+        const AppWrapper = mount(<App />);
+        const CitySearchWrapper = AppWrapper.find(CitySearch);
+        const NOEWrapper = AppWrapper.find(NumberOfEvents);
+        const eventObject = { target: { value: 10 } };
+        await NOEWrapper.instance().onChange(eventObject);
+        const locations = extractLocations(mockData);
+        CitySearchWrapper.setState({ suggestions: locations });
+        const suggestions = CitySearchWrapper.state("suggestions");
+        const selectedIndex = Math.floor(Math.random() * suggestions.length);
+        const selectedCity = suggestions[selectedIndex];
+        await CitySearchWrapper.instance().handleItemClicked(selectedCity);
+        //expect that selectedCity gets stored in App state variable 'selectedLocation'
+        expect(AppWrapper.state("selectedLocation")).toEqual(selectedCity);
+        //expect that the selected number of events will persist for the selected city.
+        expect(AppWrapper.state("events")).toHaveLength(eventObject.target.value);
         AppWrapper.unmount();
     });
 

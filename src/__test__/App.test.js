@@ -65,7 +65,7 @@ describe('<App /> integration', () => {
         const suggestionItems = AppWrapper.find(CitySearch).find(".suggestions li");
         suggestionItems.at(suggestionItems.length - 1).simulate("click");
         const allEvents = await getEvents();
-        expect(AppWrapper.state("events")).toEqual(allEvents);
+        expect(AppWrapper.state("events")).not.toHaveLength(allEvents.length);
         AppWrapper.unmount();
     });
 

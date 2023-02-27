@@ -3,20 +3,18 @@ import React, { Component } from 'react';
 class Event extends Component {
     state = {
         isCollapsed: true
-    }
+    };
 
-    handleShowDetails = () => {
-        this.setState({ isCollapsed: false })
-    }
-
-    handleHideDetails = () => {
-        this.setState({ isCollapsed: true })
-    }
+    toggleDetails = () => {
+        this.setState((prevState) => ({
+            isCollapsed: !prevState.isCollapsed,
+        }));
+    };
 
 
     render() {
-        const { event } = this.props
-
+        const { event } = this.props;
+        const { isCollapsed } = this.state;
         const dateStart = new Date(event.start.dateTime).toGMTString();
         const dateEnd = new Date(event.end.dateTime).toGMTString();
 
@@ -25,29 +23,19 @@ class Event extends Component {
                 <h4 className='name' style={{ fontWeight: "bold" }}>{event.summary}</h4>
                 <p className='start'>{dateStart}</p>
                 <p className='end'>{dateEnd}</p>
-                <p className='location'>@{event.summary} | {event.location}</p>
-                {this.state.isCollapsed === true ?
-                    <button
-                        className="showDetails"
-                        onClick={this.handleShowDetails}
-                    >Show Details
-                    </button>
-                    :
-                    (<div className='toggle'>
+                <p className='location'>{event.location}</p>
+                {!isCollapsed && (
+                    <div className='event-details'>
                         <a className='link' href={event.htmlLink}>See details on Google Calendar</a>
                         <p className='description'>{event.description}</p>
-                        <p className='creator'>{event.creator}</p>
-                        <p className='organizer'>{event.organizer}</p>
-                        <p className='recurrence'>{event.recurrence}</p>
-                        <p className='sequence'>{event.sequence}</p>
-                        <p className='reminders'>{event.reminders}</p>
-                        <p className='type'>{event.eventType}</p>
-                        <button
-                            className="hideDetails"
-                            onClick={this.handleHideDetails}
-                        >Hide Details
-                        </button>
-                    </div>)}
+                    </div>
+                )}
+                <button
+                    className="details-btn"
+                    onClick={() => this.toggleDetails()}
+                >{isCollapsed ? "Show" : "Hide"} Details
+                </button>
+
             </div>
         );
     }

@@ -24,7 +24,7 @@ class Alert extends Component {
 export class InfoAlert extends Alert {
     constructor(props) {
         super(props);
-        this.color = 'blue';
+        this.color = 'orange';
     }
 }
 
@@ -38,6 +38,6 @@ export class WarningAlert extends Alert {
 export class ErrorAlert extends Alert {
     constructor(props) {
         super(props);
-        this.color = 'red';
+        this.color = 'orange';
     }
 }

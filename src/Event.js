@@ -26,7 +26,7 @@ class Event extends Component {
                 <p className='location'>{event.location}</p>
                 {!isCollapsed && (
                     <div className='event-details'>
-                        <a className='link' href={event.htmlLink}>See details on Google Calendar</a>
+                        <a className='link' href={event.htmlLink} style={{ fontWeight: "bold" }}>See details on Google Calendar</a>
                         <p className='description'>{event.description}</p>
                     </div>
                 )}

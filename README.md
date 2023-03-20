@@ -8,7 +8,6 @@
 
 📖 [Meet App]
 ------
-Describe your project in 1 or 2 sentences.
 [Meet App] is a serverless, progressive web application (PWA) build with React using a test-driven development (TDD) technique. The application uses the Google Calendar API to fetch upcoming events.
 
 🛠 Built With

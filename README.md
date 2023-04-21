@@ -115,3 +115,8 @@ You can deploy this project using: GitHub Pages.
 
 GitHub: @andreawork-hub
 
+🙏 Acknowledgments
+-----
+I would like to thank to Stephen Barungi and Bless Darah, who helped me to complete the project in terms of my studies at CF successfully.
+
+
